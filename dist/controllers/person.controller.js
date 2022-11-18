@@ -14,8 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateVotes = exports.getPersons = exports.addPerson = void 0;
 const database_1 = __importDefault(require("../database"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
 function addPerson(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.default.query(`INSERT INTO persons (name,description,image_url) VALUES ('${req.body.name}','${req.body.description}','${req.body.image_url}') RETURNING *`)

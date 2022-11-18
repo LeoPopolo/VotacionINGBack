@@ -1,8 +1,5 @@
 import { Request, Response } from 'express';
 import conn from '../database';
-import dotenv from 'dotenv';
-dotenv.config();
-
 export async function addPerson(req: Request, res: Response) {
 
     conn.query(`INSERT INTO persons (name,description,image_url) VALUES ('${req.body.name}','${req.body.description}','${req.body.image_url}') RETURNING *`)
