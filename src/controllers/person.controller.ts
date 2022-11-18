@@ -45,7 +45,7 @@ export async function getPersons(req: Request, res: Response) {
 export async function updateVotes(req: Request, res: Response) {
 
     conn.query(`UPDATE persons SET votes_quantity = votes_quantity + 1 WHERE id = ${req.params.id}`)
-    .then(resp => {
+    .then(() => {
 
         res.status(200).json({
             status: 'OK',
