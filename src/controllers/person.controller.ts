@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import conn from '../database';
+
 export async function addPerson(req: Request, res: Response) {
 
     conn.query(`INSERT INTO persons (name,description,image_url) VALUES ('${req.body.name}','${req.body.description}','${req.body.image_url}') RETURNING *`)
@@ -28,7 +29,7 @@ export async function getPersons(req: Request, res: Response) {
         const data = resp.rows;
 
         res.status(200).json({
-            ...data
+            data
         });
     })
     .catch(err => {
