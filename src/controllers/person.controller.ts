@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import conn from '../database';
-import path from 'path';
 
 export async function addPerson(req: Request, res: Response) {
 
