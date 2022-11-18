@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import conn from '../database';
+import path from 'path';
 
 export async function addPerson(req: Request, res: Response) {
 
@@ -23,7 +24,7 @@ export async function addPerson(req: Request, res: Response) {
 
 export async function getPersons(req: Request, res: Response) {
 
-    conn.query(`SELECT * FROM persons ORDER BY votes_quantity DESC`)
+    conn.query(`SELECT * FROM persons ORDER BY votes_quantity DESC, name ASC`)
     .then(resp => {
      
         const data = resp.rows;
@@ -58,4 +59,8 @@ export async function updateVotes(req: Request, res: Response) {
             message: err.message
         });
     });
+}
+
+export function downloadImage(req: Request, res: Response) {
+    res.status(200).sendFile( path.resolve( `./src/files/${req.params.file_path}`));
 }

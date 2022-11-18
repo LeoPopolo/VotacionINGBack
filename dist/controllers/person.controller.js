@@ -36,7 +36,9 @@ function getPersons(req, res) {
         database_1.default.query(`SELECT * FROM persons ORDER BY votes_quantity DESC`)
             .then(resp => {
             const data = resp.rows;
-            res.status(200).json(Object.assign({}, data));
+            res.status(200).json({
+                data
+            });
         })
             .catch(err => {
             console.log(err);
