@@ -12,9 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.downloadImage = exports.updateVotes = exports.getPersons = exports.addPerson = void 0;
+exports.updateVotes = exports.getPersons = exports.addPerson = void 0;
 const database_1 = __importDefault(require("../database"));
-const path_1 = __importDefault(require("path"));
 function addPerson(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.default.query(`INSERT INTO persons (name,description,image_url) VALUES ('${req.body.name}','${req.body.description}','${req.body.image_url}') RETURNING *`)
@@ -54,7 +53,7 @@ exports.getPersons = getPersons;
 function updateVotes(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.default.query(`UPDATE persons SET votes_quantity = votes_quantity + 1 WHERE id = ${req.params.id}`)
-            .then(resp => {
+            .then(() => {
             res.status(200).json({
                 status: 'OK',
                 message: 'User voted!'
@@ -70,8 +69,4 @@ function updateVotes(req, res) {
     });
 }
 exports.updateVotes = updateVotes;
-function downloadImage(req, res) {
-    res.status(200).sendFile(path_1.default.resolve(`./src/files/${req.params.file_path}`));
-}
-exports.downloadImage = downloadImage;
 //# sourceMappingURL=person.controller.js.map
