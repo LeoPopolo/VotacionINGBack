@@ -59,3 +59,22 @@ export async function updateVotes(req: Request, res: Response) {
         });
     });
 }
+
+export async function restartVotes(req: Request, res: Response) {
+
+    conn.query(`UPDATE persons SET votes_quantity = 0`)
+    .then(() => {
+
+        res.status(200).json({
+            status: 'OK',
+            message: 'Votes restarted!'
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(400).send({
+            status: 'ERROR',
+            message: err.message
+        });
+    });
+}
